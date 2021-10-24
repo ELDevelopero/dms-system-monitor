@@ -1,7 +1,5 @@
 # DMS-SYSTEM-MONITOR
 
-**Clone and run for a quick way to see NodeGui in action.**
-
 ## To Use
 
 To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer.
@@ -12,9 +10,9 @@ From your command line:
 
 ```bash
 # Clone the repository
-git clone https://github.com/link-to-the-repository
+git clone https://github.com/ELDevelopero/dms-system-monitor
 # Go into the repository
-cd into the directory of the cloned repository
+cd dms-system-monitor
 # Install dependencies
 npm install
 # Run the app
