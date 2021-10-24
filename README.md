@@ -47,6 +47,10 @@ This will build the distributable using @nodegui/packer based on your template. 
 
 More details about packer can be found here: https://github.com/nodegui/packer
 
+## Credits
+
+"Icons made by Pixel perfect from www.flaticon.com"
+
 ## License
 
 MIT
