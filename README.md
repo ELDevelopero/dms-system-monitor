@@ -49,8 +49,7 @@ More details about packer can be found here: https://github.com/nodegui/packer
 
 ## Credits
 
-"Icons made by Pixel perfect from www.flaticon.com"
-"Icons made by Freepik from www.flaticon.com"
+"Icons made by Pixel perfect, Freepik, surang from www.flaticon.com" 
 
 ## License
 
