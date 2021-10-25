@@ -10,7 +10,6 @@ import ram from "../assets/RAM50.png";
 import hdd from "../assets/HDD50.png";
 
 import { freemem } from "os";
-import { info } from "console";
 
 const win = new QMainWindow();
 win.setWindowTitle("DMS System Monitor");
@@ -54,11 +53,6 @@ const label = new QLabel();
 label.setObjectName("mylabel");
 label.setText("DMS System Monitor");
 
-// const button = new QPushButton();
-// button.setIcon(new QIcon(logo));
-
-// const label2 = new QLabel();
-// label2.setText("World");
 const label3 = new QLabel();
 label3.setInlineStyle("font-size:12; font-weight: bold; padding: 4; opacity:1");
 
@@ -106,32 +100,23 @@ versionLabel.setInlineStyle(
 );
 versionLabel.setText("Version: 1.0.0");
 
-// label2.setInlineStyle(`
-//   color: red;
-// `);
-
-console.clear();
 var intervalID = setInterval(myCallback, 1500);
 
 function myCallback() {
   var cpus = os.cpus();
   var cspeed = os.cpus().map((cpu) => cpu.speed);
   var freeRam = freemem();
-  disk.check(path).then(
-    (info) =>
+  disk
+    .check(path)
+    .then((info) =>
       diskUsageLabel.setText(
         "Available disk space: " +
           (info.available / (1024 * 1024 * 1024)).toFixed(2) +
           " Gb"
       )
-    // console.log(
-    //   `available disk space: ${info.available / (1024 * 1024 * 1024) + " Gb"}`
-    // )
-  );
-  // var freeRam = freemem();
-  // console.log(cspeed, model[0])
+    );
+
   for (var i = 0, sum = 0; i < cpus.length; sum += cspeed[i++]);
-  // console.log(sum/cpus.length + " MhZ")
   coreSpeedLabel.setText("Core frequency: " + cspeed + " MHz");
   label3.setText(
     "Total frequency: " + (sum / cpus.length / 1000).toFixed(2) + " GHz"
@@ -145,7 +130,6 @@ function myCallback() {
       (((totalRam - freeRam) / totalRam) * 100).toFixed(2) +
       " %"
   );
-  process.stdout.write(sum / cpus.length / 1000 + " GHz" + "\r");
 }
 
 rootLayout.addWidget(label);
@@ -197,6 +181,3 @@ win.setStyleSheet(
 win.show();
 
 (global as any).win = win;
-
-// align-items: 'center';
-//       justify-content: 'center';
