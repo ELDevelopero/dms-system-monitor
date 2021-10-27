@@ -18,13 +18,6 @@ win.setWindowOpacity(0.9);
 const os = require("os");
 var disk = require("diskusage");
 var path = os.platform() === "win32" ? "c:" : "/";
-disk
-  .check(path)
-  .then((info) =>
-    console.log(
-      `available disk space: ${info.available / (1024 * 1024 * 1024) + " Gb"}`
-    )
-  );
 
 const centralWidget = new QWidget();
 centralWidget.setObjectName("myroot");
