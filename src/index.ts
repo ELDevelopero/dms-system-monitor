@@ -4,10 +4,12 @@ import {
   QLabel,
   FlexLayout,
   QPixmap,
+  QPushButton,
 } from "@nodegui/nodegui";
 import cpu from "../assets/CPU50.png";
 import ram from "../assets/RAM50.png";
 import hdd from "../assets/HDD50.png";
+import appIcon from "../assets/iconSysMon.png";
 
 import { freemem } from "os";
 
@@ -87,6 +89,24 @@ disk
     )
   );
 
+const button = new QPushButton();
+button.setText("Clear RAM");
+button.addEventListener("clicked", () => {
+  var sudo = require("sudo-prompt");
+  var options = {
+    name: "DMS System Monitor",
+    icons: appIcon,
+  };
+  sudo.exec(
+    "sync; sysctl -w vm.drop_caches=3; sync",
+    options,
+    function (error, stdout, stderr) {
+      if (error) button.setText(error);
+      console.log("stdout: " + stdout);
+    }
+  );
+});
+
 const versionLabel = new QLabel();
 versionLabel.setInlineStyle(
   "font-size:12; font-weight: bold; padding: 4; align-self:'center'"
@@ -137,6 +157,7 @@ rootLayout.addWidget(percentageUsedLabel);
 rootLayout.addWidget(hddImageLabel);
 rootLayout.addWidget(diskTotalLabel);
 rootLayout.addWidget(diskUsageLabel);
+rootLayout.addWidget(button);
 rootLayout.addWidget(versionLabel);
 win.setCentralWidget(centralWidget);
 win.setStyleSheet(
