@@ -89,6 +89,11 @@ disk
     )
   );
 
+const diskPercentageLabel = new QLabel();
+diskPercentageLabel.setInlineStyle(
+  "font-size:12; font-weight: bold; padding: 4;"
+);
+
 const button = new QPushButton();
 button.setText("Clear RAM");
 button.addEventListener("clicked", () => {
@@ -111,7 +116,7 @@ const versionLabel = new QLabel();
 versionLabel.setInlineStyle(
   "font-size:12; font-weight: bold; padding: 4; align-self:'center'"
 );
-versionLabel.setText("Version: 1.0.0");
+versionLabel.setText("Version: 1.0.1");
 
 var intervalID = setInterval(myCallback, 1500);
 
@@ -129,6 +134,16 @@ function myCallback() {
       )
     );
 
+  disk
+    .check(path)
+    .then((info) =>
+      diskPercentageLabel.setText(
+        "Used disk space: " +
+          (((info.total - info.available) / info.total) * 100).toFixed(2) +
+          " %"
+      )
+    );
+
   for (var i = 0, sum = 0; i < cpus.length; sum += cspeed[i++]);
   coreSpeedLabel.setText("Core frequency: " + cspeed + " MHz");
   label3.setText(
@@ -139,9 +154,7 @@ function myCallback() {
   );
 
   percentageUsedLabel.setText(
-    "Percentage used RAM: " +
-      (((totalRam - freeRam) / totalRam) * 100).toFixed(2) +
-      " %"
+    "Used RAM: " + (((totalRam - freeRam) / totalRam) * 100).toFixed(2) + " %"
   );
 }
 
@@ -157,6 +170,7 @@ rootLayout.addWidget(percentageUsedLabel);
 rootLayout.addWidget(hddImageLabel);
 rootLayout.addWidget(diskTotalLabel);
 rootLayout.addWidget(diskUsageLabel);
+rootLayout.addWidget(diskPercentageLabel);
 rootLayout.addWidget(button);
 rootLayout.addWidget(versionLabel);
 win.setCentralWidget(centralWidget);
