@@ -96,6 +96,7 @@ diskPercentageLabel.setInlineStyle(
 
 const button = new QPushButton();
 button.setText("Clear RAM");
+button.setInlineStyle("font-weight: bold");
 button.addEventListener("clicked", () => {
   var sudo = require("sudo-prompt");
   var options = {
