@@ -47,9 +47,13 @@ This will build the distributable using @nodegui/packer based on your template. 
 
 More details about packer can be found here: https://github.com/nodegui/packer
 
+## Notes
+
+Please note, that the RAM information will be different from the one shown in system monitor for instance. It is because this monitor displays the total free and used memory(together with cache), while others, may display the available memory, ignoring the cache.
+
 ## Credits
 
-"Icons made by Pixel perfect, Freepik, surang from www.flaticon.com" 
+"Icons made by Pixel perfect, Freepik, surang from www.flaticon.com"
 
 ## License
 
