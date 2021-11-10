@@ -3,4 +3,4 @@ dist/
 *.log
 .vscode
 yarn.lock
-deploy
+deploy/
