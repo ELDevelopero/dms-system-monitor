@@ -53,7 +53,7 @@ Please note, that the RAM information will be different from the one shown in sy
 
 ## Credits
 
-"Icons made by Pixel perfect, Freepik, surang from www.flaticon.com"
+"Icons made by Pixel perfect, Freepik, surang, Nhor Phai from www.flaticon.com"
 
 ## License
 
