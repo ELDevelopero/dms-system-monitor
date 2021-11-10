@@ -9,13 +9,16 @@ import {
 import cpu from "../assets/CPU50.png";
 import ram from "../assets/RAM50.png";
 import hdd from "../assets/HDD50.png";
-import appIcon from "../assets/iconSysMon.png";
+import appIcon from "../assets/iconSysMon1.png";
 
 import { freemem } from "os";
+
+// QApplication::setWindowIcon();
 
 const win = new QMainWindow();
 win.setWindowTitle("DMS System Monitor");
 win.setWindowOpacity(0.9);
+// win.setWindowIcon(appIcon);
 
 const os = require("os");
 var disk = require("diskusage");
