@@ -14,7 +14,7 @@ import appIcon from "../assets/iconSysMon.png";
 import { freemem } from "os";
 
 const win = new QMainWindow();
-win.setWindowTitle("DMS System Monitor Test4");
+win.setWindowTitle("DMS System Monitor Test5");
 win.setWindowOpacity(0.9);
 
 const os = require("os");
