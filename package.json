@@ -1,6 +1,6 @@
 {
   "name": "dms-system-monitor",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "index.js",
   "author": "DMS <samoteev@gmail.com>",
   "license": "MIT",

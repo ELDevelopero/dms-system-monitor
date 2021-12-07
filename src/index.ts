@@ -177,7 +177,7 @@ const versionLabel = new QLabel();
 versionLabel.setInlineStyle(
   "font-size:12; font-weight: bold; padding: 4; align-self:'center'"
 );
-versionLabel.setText("Version: 1.0.1");
+versionLabel.setText("Version: 1.1.0");
 
 var intervalID = setInterval(myCallback, 1500);
 
