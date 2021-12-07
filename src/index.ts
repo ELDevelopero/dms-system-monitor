@@ -5,6 +5,8 @@ import {
   FlexLayout,
   QPixmap,
   QPushButton,
+  QMessageBox,
+  ButtonRole,
 } from "@nodegui/nodegui";
 import cpu from "../assets/CPU50.png";
 import ram from "../assets/RAM50.png";
@@ -12,9 +14,10 @@ import hdd from "../assets/HDD50.png";
 import appIcon from "../assets/iconSysMon.png";
 
 import { freemem } from "os";
+import { exec } from "child_process";
 
 const win = new QMainWindow();
-win.setWindowTitle("DMS System Monitor Test6");
+win.setWindowTitle("DMS System Monitor");
 win.setWindowOpacity(0.9);
 
 const os = require("os");
@@ -96,7 +99,7 @@ diskPercentageLabel.setInlineStyle(
 
 const button = new QPushButton();
 button.setText("Clear RAM");
-button.setInlineStyle("font-weight: bold");
+button.setInlineStyle("font-weight: bold;");
 button.addEventListener("clicked", () => {
   var sudo = require("sudo-prompt");
   var options = {
@@ -107,11 +110,68 @@ button.addEventListener("clicked", () => {
     "sync; sysctl -w vm.drop_caches=3; sync",
     options,
     function (error, stdout, stderr) {
-      if (error) button.setText(error);
+      if (error) button.setText("error");
       console.log("stdout: " + stdout);
     }
   );
 });
+
+const messageBox = new QMessageBox();
+messageBox.setText(
+  "This action will clear the apt cache and unused kernel modules, perform it if you are sure that you do not need any older kernel modules anymore."
+);
+const ok = new QPushButton();
+ok.setText("Ok");
+ok.addEventListener("clicked", () => {
+  CleanAll();
+  freeSpace.setText("Clean Up 🕒");
+});
+const cancel = new QPushButton();
+cancel.setText("Cancel");
+messageBox.addButton(ok, ButtonRole.ApplyRole);
+messageBox.addButton(cancel, ButtonRole.DestructiveRole);
+
+// messageBox.exec();
+
+const freeSpace = new QPushButton();
+freeSpace.setText("Clean Up");
+freeSpace.setInlineStyle("font-weight: bold;");
+
+freeSpace.addEventListener("clicked", () => {
+  messageBox.exec();
+});
+
+function ResetButton() {
+  freeSpace.setText("Clean Up");
+  freeSpace.setInlineStyle("font-size:12; font-weight: bold; color: black");
+}
+
+function CleanAll() {
+  var sudo = require("sudo-prompt");
+  var options = {
+    name: "DMS System Monitor",
+  };
+  sudo.exec(
+    "apt clean && apt autoremove -y",
+    options,
+    function (error, stdout, stderr) {
+      if (error) {
+        freeSpace.setText("Error ❌");
+        setTimeout(ResetButton, 4000);
+        return;
+      }
+      if (stderr) {
+        freeSpace.setText("Error ❌");
+        setTimeout(ResetButton, 4000);
+      }
+      if (stdout) {
+        freeSpace.setText("Done ✔️");
+        freeSpace.setInlineStyle("color:green");
+        setTimeout(ResetButton, 4000);
+      }
+    }
+  );
+}
 
 const versionLabel = new QLabel();
 versionLabel.setInlineStyle(
@@ -173,7 +233,9 @@ rootLayout.addWidget(diskTotalLabel);
 rootLayout.addWidget(diskUsageLabel);
 rootLayout.addWidget(diskPercentageLabel);
 rootLayout.addWidget(button);
+rootLayout.addWidget(freeSpace);
 rootLayout.addWidget(versionLabel);
+
 win.setCentralWidget(centralWidget);
 win.setStyleSheet(
   `
