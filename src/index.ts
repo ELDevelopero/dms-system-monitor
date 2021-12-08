@@ -110,8 +110,15 @@ button.addEventListener("clicked", () => {
     "sync; sysctl -w vm.drop_caches=3; sync",
     options,
     function (error, stdout, stderr) {
-      if (error) button.setText("error");
+      if (error) button.setText("Error ❌");
       console.log("stdout: " + stdout);
+      setTimeout(ResetButton, 4000);
+
+      if (stdout) {
+        button.setText("Done ✔️");
+        button.setInlineStyle("color:green");
+        setTimeout(ResetButton, 4000);
+      }
     }
   );
 });
@@ -144,6 +151,8 @@ freeSpace.addEventListener("clicked", () => {
 function ResetButton() {
   freeSpace.setText("Clean Up");
   freeSpace.setInlineStyle("font-size:12; font-weight: bold; color: black");
+  button.setText("Clear RAM");
+  button.setInlineStyle("font-size:12; font-weight: bold; color: black");
 }
 
 function CleanAll() {
