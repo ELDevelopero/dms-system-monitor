@@ -114,6 +114,11 @@ button.addEventListener("clicked", () => {
       console.log("stdout: " + stdout);
       setTimeout(ResetButton, 4000);
 
+      if (stderr) {
+        button.setText("Error ❌");
+        setTimeout(ResetButton, 4000);
+      }
+
       if (stdout) {
         button.setText("Done ✔️");
         button.setInlineStyle("color:green");
